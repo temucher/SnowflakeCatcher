@@ -1,7 +1,21 @@
-//Teagan Mucher, Block 4 AP CS, "Snowflake Catcher"
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class SnowflakeCatcher extends PApplet {
 
 Snowflake [] fall;
-void setup()
+public void setup()
 {
   size(500,500);
   background(0);
@@ -11,7 +25,7 @@ void setup()
     fall[i]=new Snowflake();
   }
 }
-void draw()
+public void draw()
 {
   // background(0);
   for(int i = 0; i<fall.length;i++)
@@ -23,7 +37,7 @@ void draw()
     fall[i].wrap();
   }
 }
-void mouseDragged()
+public void mouseDragged()
 { 
   if(mouseButton==LEFT)
   {
@@ -57,9 +71,8 @@ class Snowflake
     }
     isMoving = true;
   } 
-  void touchingCatcher()
+  public void touchingCatcher()
   {
-    //bounces the snowflake off the side of the catcher
     if(get(x+12,y)==color(255,0,0))
     {
       stroke(0);
@@ -74,7 +87,6 @@ class Snowflake
       ellipse(x,y-z,snowflakeSize+1,snowflakeSize+1);
       x+=10;
     }
-    //catches the snowflake
     if ((get(x, y+12)==color(255,0,0)))
     {
       isMoving=false;
@@ -84,26 +96,26 @@ class Snowflake
       isMoving=true;
     }
   }
-  void show()
+  public void show()
   {//draws the snowflake 
     noStroke();
     fill(255);
     ellipse(x,y,snowflakeSize,snowflakeSize);
   }
-  void erase()
+  public void erase()
   { //covers up the snowflake
     stroke(0);
     fill(0); 
     ellipse(x,y-z,snowflakeSize+1,snowflakeSize+1);
   }
-  void move()
+  public void move()
   {//moves the snowflake
     if(isMoving==true)
     {
       y+=z;
     }
   }
-  void wrap()
+  public void wrap()
   {//resets the snowflake if it moves off the screen
     if(y>515)
     {
@@ -115,3 +127,12 @@ class Snowflake
 }
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "SnowflakeCatcher" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
